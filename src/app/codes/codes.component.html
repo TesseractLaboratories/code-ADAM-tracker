@@ -1,0 +1,10 @@
+<h2>Code {{code.id}} Details: {{code.name | uppercase}}</h2>
+<div><label>Name: </label><input [(ngModel)]="code.name" placeholder=""></div>
+<div><label>Age: </label><input [(ngModel)]="code.age" placeholder=""></div>
+<div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder=""></div>
+<div><label>Cosplay: </label><input [(ngModel)]="code.cosplay" placeholder=""></div>
+<div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder=""></div>
+<div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder=""></div>
+<div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder=""></div>
+<div><label>Missing Since </label> {{code.timestamp | date : 'H:mm a, MMM d'}}</div>
+<div><label>Resolved: </label><input [(ngModel)]="code.resolved" placeholder=""></div>
