@@ -40,7 +40,7 @@ export const MOCK_CODES: Code[] = [
         'unknown',
         'unknown',
         1537933540000,
-        null,
+        1537933720000,
         false
     ),
     new Code(
@@ -53,8 +53,8 @@ export const MOCK_CODES: Code[] = [
         'unknown',
         'unknown',
         'unknown',
-        1526920054000,
-        null,
+        1537933540000,
+        1537933900000,
         false
     ),
     new Code(
@@ -67,8 +67,8 @@ export const MOCK_CODES: Code[] = [
         'unknown',
         'unknown',
         'unknown',
-        1526920054000,
-        null,
+        1537933540000,
+        1537934080000,
         false
     ),
     new Code(
