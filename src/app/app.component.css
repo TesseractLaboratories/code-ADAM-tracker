@@ -1,0 +1,42 @@
+/* Application-wide Styles */
+/*TODO:: style */
+.found {
+    background-color: #80dc90;
+}
+
+.ok {
+    background-color: #60d9dc;
+}
+
+.alert {
+    background-color: #d9dc5e;
+}
+
+.warn {
+    background-color: #dc823b;
+}
+
+.severe {
+    background-color: #ee7679;
+}
+h1 {
+    color: #992d00;
+    font-family: Times New Roman, Georgia, serif;
+    font-size: 250%;
+}
+h2, h3 {
+    color: #444;
+    font-family: Times New Roman, Georgia, serif;
+    font-weight: lighter;
+}
+body {
+    margin: 2em;
+}
+body, input[text], button {
+    color: #004288;
+    font-family: Cambria, Georgia;
+}
+/* everywhere else */
+* {
+    font-family: Times New Roman, Georgia, serif;
+}

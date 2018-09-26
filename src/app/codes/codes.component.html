@@ -1,0 +1,11 @@
+<h2>Codes</h2>
+<ul class="codes">
+    <li *ngFor="let code of codes"
+        (click)="onSelect(code)"
+        class="{{code.getTimeMissingCss(true)}}"
+        [class.selected]="code === selectedCode">
+        <span class="badge">{{code.id}}</span> {{code.name}}
+    </li>
+</ul>
+
+<app-code-detail [code]="selectedCode"></app-code-detail>
