@@ -5,7 +5,7 @@ import { MOCK_CODES } from '../mock-codes';
 @Component({
   selector: 'app-codes',
   templateUrl: './codes.component.html',
-  styleUrls: ['./codes.component.css']
+  styleUrls: ['../app.component.css', './codes.component.css']
 })
 export class CodesComponent implements OnInit {
 

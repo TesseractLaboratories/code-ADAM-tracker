@@ -3,20 +3,9 @@
     <li *ngFor="let code of codes"
         (click)="onSelect(code)"
         class="{{code.getTimeMissingCss(true)}}"
-        [class.selected]="code === selectedCode"><span class="badge">{{code.id}}</span> {{code.name}}</li>
+        [class.selected]="code === selectedCode">
+        <span class="badge">{{code.id}}</span> {{code.name}}
+    </li>
 </ul>
-<div *ngIf="selectedCode">
-    <h2>Selected Code {{selectedCode.id}} Details: {{selectedCode.name | uppercase}}</h2>
-    <div><label>Name: </label><input [(ngModel)]="selectedCode.name" placeholder=""></div>
-    <div><label>Age: </label><input [(ngModel)]="selectedCode.age" placeholder=""></div>
-    <div><label>Gender: </label><input [(ngModel)]="selectedCode.gender" placeholder=""></div>
-    <div><label>Cosplay: </label><input [(ngModel)]="selectedCode.cosplay" placeholder=""></div>
-    <div *ngIf="selectedCode.cosplayImg">  <img height="300" alt="Cosplay Reference" src="{{selectedCode.cosplayImg}}"></div>
-    <div><label>Description (physical): </label><input [(ngModel)]="selectedCode.descriptionPhysical" placeholder=""></div>
-    <div><label>Description (clothing): </label><input [(ngModel)]="selectedCode.descriptionClothing" placeholder=""></div>
-    <div><label>Last Seen: </label><input [(ngModel)]="selectedCode.lastSeen" placeholder=""></div>
-    <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="selectedCode.timestampLogged" placeholder=""></div>
-    <div *ngIf="selectedCode.resolved; else missing"><label class="{{selectedCode.getTimeMissingCss()}}">Found at {{selectedCode.timestampResolved | date : 'H:mm, MMM d'}} after {{selectedCode.getTimeMissing()}}</label></div>
-    <ng-template #missing><label class="{{selectedCode.getTimeMissingCss()}}">Missing For {{selectedCode.getTimeMissing()}}, since {{selectedCode.timestampLogged | date : 'H:mm, MMM d'}}</label></ng-template>
-    <div><button (click)="selectedCode.toggleFound()">Update</button></div>
-</div>
+
+<app-code-detail [code]="selectedCode"></app-code-detail>

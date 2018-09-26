@@ -1,24 +1,4 @@
 /* CodesComponent's private CSS styles */
-.found {
-    background-color: #80dc90;
-}
-
-.ok {
-    background-color: #60d9dc;
-}
-
-.alert {
-    background-color: #d9dc5e;
-}
-
-.warn {
-    background-color: #dc823b;
-}
-
-.severe {
-    background-color: #ee7679;
-}
-
 .selected {
     background-color: #CFD8DC !important;
     color: white;
