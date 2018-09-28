@@ -1,0 +1,19 @@
+<div *ngIf="code">
+  <h2>Selected Code {{code.id}} Details: {{code.name | uppercase}}</h2>
+  <div><label>Name: </label><input [(ngModel)]="code.name" placeholder=""></div>
+  <div><label>Age: </label><input [(ngModel)]="code.age" placeholder=""></div>
+  <div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder=""></div>
+  <div><label>Cosplay: </label><input [(ngModel)]="code.cosplay" placeholder=""></div>
+  <div *ngIf="code.cosplayImg">  <img height="300" alt="Cosplay Reference" src="{{code.cosplayImg}}"></div>
+  <div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder=""></div>
+  <div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder=""></div>
+  <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder=""></div>
+  <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="code.timestampLogged" placeholder=""></div>
+  <div *ngIf="code.resolved; else missing">
+    <label class="{{code.getTimeMissingCss()}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{code.getTimeMissing()}}</label>
+  </div>
+  <ng-template #missing>
+    <label class="{{code.getTimeMissingCss()}}">Missing For {{code.getTimeMissing()}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
+  </ng-template>
+  <div><button (click)="code.toggleFound()">Update</button></div>
+</div>
