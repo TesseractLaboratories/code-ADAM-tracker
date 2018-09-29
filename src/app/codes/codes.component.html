@@ -1,3 +1,4 @@
+<app-code-detail [code]="selectedCode"></app-code-detail>
 <h2>Codes</h2>
 <ul class="codes">
     <li *ngFor="let code of codes"
@@ -7,5 +8,3 @@
         <span class="badge">{{code.id}}</span> {{code.name}}
     </li>
 </ul>
-
-<app-code-detail [code]="selectedCode"></app-code-detail>

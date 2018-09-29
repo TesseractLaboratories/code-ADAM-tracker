@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Code } from '../code';
-import { MOCK_CODES } from '../mock-codes';
+import { CodeService } from '../code.service';
 
 @Component({
   selector: 'app-codes',
@@ -9,15 +9,21 @@ import { MOCK_CODES } from '../mock-codes';
 })
 export class CodesComponent implements OnInit {
 
-  constructor() { }
-    codes = MOCK_CODES;
-    selectedCode: Code;
+  constructor(private codeService: CodeService) { }
 
-    onSelect(code: Code): void {
-      this.selectedCode = code;
-    }
+  codes: Code[];
+  selectedCode: Code;
+
+  getCodes(): void {
+    this.codes = this.codeService.getCodes();
+  }
+
+  onSelect(code: Code): void {
+    this.selectedCode = code;
+  }
 
   ngOnInit() {
+    this.getCodes();
   }
 
 }

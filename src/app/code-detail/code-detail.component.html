@@ -1,4 +1,4 @@
-<div *ngIf="code">
+<div *ngIf="code; else image">
   <h2>Selected Code {{code.id}} Details: {{code.name | uppercase}}</h2>
   <div><label>Name: </label><input [(ngModel)]="code.name" placeholder=""></div>
   <div><label>Age: </label><input [(ngModel)]="code.age" placeholder=""></div>
@@ -17,3 +17,6 @@
   </ng-template>
   <div><button (click)="code.toggleFound()">Update</button></div>
 </div>
+<ng-template #image>
+  <img width="200" alt="Angular Logo" src="https://www.kumoricon.org/files/images/logo-2018-rasterized.png">
+</ng-template>
