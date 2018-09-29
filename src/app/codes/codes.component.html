@@ -1,5 +1,7 @@
+<button *ngIf="selectedCode" (click)="close()">Close selected</button>
 <app-code-detail [code]="selectedCode"></app-code-detail>
 <h2>Codes</h2>
+<!--TODO:: Sort by resolved AND timestamp-->
 <ul class="codes">
     <li *ngFor="let code of codes"
         (click)="onSelect(code)"

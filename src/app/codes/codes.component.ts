@@ -23,6 +23,10 @@ export class CodesComponent implements OnInit {
     this.selectedCode = code;
   }
 
+    close(): void {
+        this.selectedCode = null;
+    }
+
   ngOnInit() {
     this.getCodes();
   }

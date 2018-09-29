@@ -3,8 +3,13 @@
   <div><label>Name: </label><input [(ngModel)]="code.name" placeholder=""></div>
   <div><label>Age: </label><input [(ngModel)]="code.age" placeholder=""></div>
   <div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder=""></div>
-  <div><label>Cosplay: </label><input [(ngModel)]="code.cosplay" placeholder=""></div>
-  <div *ngIf="code.cosplayImg">  <img height="300" alt="Cosplay Reference" src="{{code.cosplayImg}}"></div>
+  <div>
+    <label>Cosplay: </label>
+    <input [(ngModel)]="code.cosplay" placeholder="">
+    <button *ngIf="code.cosplayImg" (click)="showImage()">{{imageDisplay ? "Hide image" : "Show Image"}}</button>
+  </div>
+  <!--TODO:: add image-->
+  <div *ngIf="imageDisplay"><img height="300" alt="Cosplay Reference" src="{{code.cosplayImg}}"></div>
   <div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder=""></div>
   <div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder=""></div>
   <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder=""></div>
@@ -18,5 +23,5 @@
   <div><button (click)="code.toggleFound()">Update</button></div>
 </div>
 <ng-template #image>
-  <img width="200" alt="Angular Logo" src="https://www.kumoricon.org/files/images/logo-2018-rasterized.png">
+  <img width="300" alt="Angular Logo" src="https://www.kumoricon.org/files/images/logo-2018-rasterized.png">
 </ng-template>

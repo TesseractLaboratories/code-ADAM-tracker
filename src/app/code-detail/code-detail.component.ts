@@ -9,6 +9,11 @@ import { Code } from '../code';
 
 export class CodeDetailComponent implements OnInit {
   @Input() code: Code;
+  imageDisplay = false;
+
+  showImage(): void {
+    this.imageDisplay = !this.imageDisplay;
+  }
 
   constructor() { }
 
