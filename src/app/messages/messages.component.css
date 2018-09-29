@@ -1,5 +1,6 @@
 /* MessagesComponent's private CSS styles */
 h4 {
+    margin-top: 0;
     color: #ffbc67;
     font-family: Times New Roman, Georgia, serif;
 }
@@ -23,6 +24,8 @@ button.clear {
     border-radius: 4px;
     cursor: pointer;
     cursor: hand;
+    color: #888;
+    margin-right: 12px;
 }
 button:hover {
     background-color: #cfd8dc;
@@ -32,7 +35,4 @@ button:disabled {
     color: #aaa;
     cursor: auto;
 }
-button.clear {
-    color: #888;
-    margin-bottom: 12px;
-}
+

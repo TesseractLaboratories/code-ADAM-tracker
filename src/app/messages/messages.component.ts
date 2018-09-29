@@ -8,6 +8,12 @@ import { MessageService } from '../message.service';
 })
 export class MessagesComponent implements OnInit {
 
+  showLog = false;
+
+  toggleLog(): void {
+    this.showLog = !this.showLog;
+  }
+
   constructor(public messageService: MessageService) { }
 
   ngOnInit() {

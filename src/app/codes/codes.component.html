@@ -1,6 +1,8 @@
 <button *ngIf="selectedCode" (click)="close()">Close selected</button>
 <app-code-detail [code]="selectedCode"></app-code-detail>
-<h2>Codes</h2>
+<h2>All Reports
+    <img class="click-icon" alt="Refresh" (click)="refresh()" src="https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Refresh-512.png">
+</h2>
 <!--TODO:: Sort by resolved AND timestamp-->
 <ul class="codes">
     <li *ngFor="let code of codes"

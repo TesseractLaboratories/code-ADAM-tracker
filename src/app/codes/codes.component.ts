@@ -27,6 +27,10 @@ export class CodesComponent implements OnInit {
         this.selectedCode = null;
     }
 
+    refresh(): void {
+      this.getCodes();
+    }
+
   ngOnInit() {
     this.getCodes();
   }
