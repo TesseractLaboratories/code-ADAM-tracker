@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Code } from './code';
 import { MOCK_CODES } from './mock-codes';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodeService {
 
-  getCodes(): Code[] {
-    return MOCK_CODES;
+  getCodes(): Observable<Code[]> {
+    return of(MOCK_CODES);
   }
 
   constructor() { }
