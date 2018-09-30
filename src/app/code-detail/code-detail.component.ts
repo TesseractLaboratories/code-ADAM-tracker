@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Code } from '../code';
+import {CodeService} from '../code.service';
 
 @Component({
   selector: 'app-code-detail',
@@ -27,7 +28,22 @@ export class CodeDetailComponent implements OnInit {
     Code.toggleFound(code);
   }
 
-  constructor() { }
+  upload(): void {
+    this.codeService.updateCode(this.code);
+  }
+
+  refresh(): void {
+    this.codeService.getCode(this.code.id).subscribe(newCode => this.code = newCode); // {
+    //       if (newCode === this.code) {
+    //         this.codeService.updateCode(this.code);
+    //       } else {
+    //         // TODO:: sanitize for async editing
+    //       }
+    //     }
+    // );
+  }
+
+  constructor(private codeService: CodeService) { }
 
   ngOnInit() {
   }
