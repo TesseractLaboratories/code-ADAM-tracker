@@ -6,8 +6,8 @@ import { MessageService } from './message.service';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
-    Headers: new HttpHeaders({'Content-Type': 'application/json'})
-}
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +67,7 @@ export class CodeService {
   private handleError<T> (operation = 'operation', result?: T) {
     return(error: any): Observable<T> => {
 
-      // TODO:: send the error to remote logging infrasttructure
+      // TODO:: send the error to remote logging infrastructure
         console.error(error);
 
         // TODO:: better job of transforming error for user consumption

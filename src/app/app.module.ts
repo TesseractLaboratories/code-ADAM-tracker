@@ -11,6 +11,7 @@ import { CodeDetailComponent } from './code-detail/code-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SubmitReportComponent } from './submit-report/submit-report.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CodesComponent,
     CodeDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    SubmitReportComponent
   ],
   imports: [
     BrowserModule,

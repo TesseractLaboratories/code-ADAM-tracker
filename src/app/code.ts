@@ -85,4 +85,19 @@ export class Code {
         code.timestampResolved = code.resolved ? (new Date).getTime() : null;
     }
 
+    static emptyCode(): Code {
+        return new Code(null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            (new Date).getTime(),
+            null,
+            false);
+    }
+
 }

@@ -1,0 +1,14 @@
+  <h2>New Report: {{code.name | uppercase}}</h2>
+  <div><label>Name: </label><input [(ngModel)]="code.name" placeholder="Unknown"></div>
+  <div><label>Age: </label><input [(ngModel)]="code.age" placeholder="Unknown"></div>
+  <div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder="Unknown"></div>
+  <div><label>Cosplay: </label><input [(ngModel)]="code.cosplay" placeholder="Unknown"></div>
+  <div><label>Cosplay Image Link </label><input [(ngModel)]="code.cosplayImg" placeholder=""></div>
+  <div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder="Unknown"></div>
+  <div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder="Unknown"></div>
+  <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder="Unknown"></div>
+  <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="code.timestampLogged" placeholder=""></div>
+  <div><img class="button" alt="upload" (click)="upload()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Raise_wage_rise_upraise_upgrade_up_take.png">
+    <br>
+    Submit Report
+  </div>
