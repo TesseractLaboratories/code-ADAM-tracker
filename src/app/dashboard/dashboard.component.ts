@@ -32,6 +32,9 @@ export class DashboardComponent implements OnInit {
         this.getActiveCodes();
     }
 
+    styleGridModule(code: Code): string {
+        return Code.getTimeMissingCss(code,  true);
+    }
     ngOnInit() {
         this.getActiveCodes();
     }

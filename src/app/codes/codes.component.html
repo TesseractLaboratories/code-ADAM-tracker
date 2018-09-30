@@ -7,7 +7,7 @@
 <ul class="codes">
     <li *ngFor="let code of codes"
         (click)="onSelect(code)"
-        class="{{code.getTimeMissingCss(true)}}"
+        class="{{styleListEntry(code)}}"
         [class.selected]="code === selectedCode">
         <span class="badge">{{code.id}}</span> {{code.name}}
     </li>

@@ -23,13 +23,17 @@ export class CodesComponent implements OnInit {
     this.selectedCode = code;
   }
 
-    close(): void {
-        this.selectedCode = null;
-    }
+  styleListEntry(code: Code): string {
+      return Code.getTimeMissingCss(code,  true);
+  }
 
-    refresh(): void {
-      this.getCodes();
-    }
+  close(): void {
+      this.selectedCode = null;
+  }
+
+  refresh(): void {
+    this.getCodes();
+  }
 
   ngOnInit() {
     this.getCodes();

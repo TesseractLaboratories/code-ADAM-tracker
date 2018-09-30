@@ -15,12 +15,12 @@
   <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder=""></div>
   <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="code.timestampLogged" placeholder=""></div>
   <div *ngIf="code.resolved; else missing">
-    <label class="{{code.getTimeMissingCss()}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{code.getTimeMissing()}}</label>
+    <label class="{{styleCode(code)}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{codeTimeMissing(code)}}</label>
   </div>
   <ng-template #missing>
-    <label class="{{code.getTimeMissingCss()}}">Missing For {{code.getTimeMissing()}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
+    <label class="{{styleCode(code)}}">Missing For {{codeTimeMissing(code)}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
   </ng-template>
-  <div>Update status: <button (click)="code.toggleFound()">{{code.resolved ? "STILL MISSING" : "FOUND"}}</button></div>
+  <div>Update status to <button (click)="updateFound(code)">{{code.resolved ? "STILL MISSING" : "FOUND"}}</button></div>
 </div>
 <ng-template #image>
   <img width="300" alt="Kumoricon Logo" src="https://www.kumoricon.org/files/images/logo-2018-rasterized.png">

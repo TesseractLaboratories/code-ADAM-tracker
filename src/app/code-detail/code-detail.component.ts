@@ -15,6 +15,18 @@ export class CodeDetailComponent implements OnInit {
     this.imageDisplay = !this.imageDisplay;
   }
 
+  styleCode(code: Code): string {
+    return Code.getTimeMissingCss(code,  false);
+  }
+
+  codeTimeMissing(code: Code): string {
+    return Code.getTimeMissing(code);
+  }
+
+  updateFound(code: Code): void {
+    Code.toggleFound(code);
+  }
+
   constructor() { }
 
   ngOnInit() {

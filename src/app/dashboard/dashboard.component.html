@@ -7,7 +7,7 @@
 <div class="grid grid-pad" >
   <a *ngFor="let code of codes"
       (click)="onSelect(code)"
-      class="{{code.getTimeMissingCss(true)}} module code col-1-4"
+      class="{{styleGridModule(code, true)}} module code col-1-4"
       [class.selected]="code === selectedCode">
     <span class="badge">{{code.id}}</span>
     <br>

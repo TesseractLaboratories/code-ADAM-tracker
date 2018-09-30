@@ -1,25 +1,41 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Code } from './code';
-import { MOCK_CODES } from './mock-codes';
 import {Observable, of} from 'rxjs';
 import { MessageService } from './message.service';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodeService {
 
+  // TODO:: config this based on env
+  private codesUrl = 'api/codes';
+
   getCodes(): Observable<Code[]> {
     // TODO:: send the message _after_ fetching codes
-      this.messageService.add('CodeService: Fetched codes');
+      this.log('Fetched codes');
       // TODO:: sort return by timestamp
-    return of(MOCK_CODES);
+    return this.http.get<Code[]>(this.codesUrl);
   }
 
   getUnresolvedCodes(): Observable<Code[]> {
-    this.messageService.add('CodeService: Fetching unresolved codes');
-    return of(MOCK_CODES.filter(code => !code.resolved));
+    this.log('Fetching unresolved codes');
+      return this.http.get<Code[]>(this.codesUrl)
+          .pipe(
+              // Return only unresolved codes
+              // TODO:: replace with ES query
+              map(codes => codes.filter(code => !code.resolved))
+          );
   }
 
-  constructor(private messageService: MessageService) { }
+  private log(message: string) {
+    this.messageService.add(`CodeService: ${message}`);
+  }
+
+  constructor(private http: HttpClient,
+              private messageService: MessageService) { }
+
+
 }
