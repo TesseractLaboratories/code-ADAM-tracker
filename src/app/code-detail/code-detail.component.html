@@ -1,21 +1,20 @@
 <div *ngIf="code; else image">
   <h2>Code [{{code.id}}] Details: {{code.name | uppercase}}</h2>
-  <div><img class="click-icon" alt="download" (click)="refresh()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Fall_rise_arrow_and_me_follow_twitter_leaves.png"> Download latest
-    | <img class="click-icon" alt="upload" (click)="upload()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Raise_wage_rise_upraise_upgrade_up_take.png"> Upload update </div>
-  <div><label>Name: </label><input [(ngModel)]="code.name" placeholder=""></div>
-  <div><label>Age: </label><input [(ngModel)]="code.age" placeholder=""></div>
-  <div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder=""></div>
+  <div><img class="click-icon" alt="download" (click)="refresh()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Fall_rise_arrow_and_me_follow_twitter_leaves.png"> Download latest</div>
+  <div><label>Name: </label><span>{{code.name}}</span></div>
+  <div><label>Age: </label><span>{{code.age}}</span></div>
+  <div><label>Gender: </label><span>{{code.gender}}</span></div>
   <div>
     <label>Cosplay: </label>
-    <input [(ngModel)]="code.cosplay" placeholder="">
+    <span>{{code.cosplay}}</span>
     <button *ngIf="code.cosplayImg" (click)="showImage()">{{imageDisplay ? "Hide image" : "Show Image"}}</button>
   </div>
   <!--TODO:: add image-->
   <div *ngIf="imageDisplay"><img height="300" alt="Cosplay Reference" src="{{code.cosplayImg}}"></div>
-  <div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder=""></div>
-  <div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder=""></div>
-  <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder=""></div>
-  <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="code.timestampLogged" placeholder=""></div>
+  <div><label>Description (physical): </label><span>{{code.descriptionPhysical}}</span></div>
+  <div><label>Description (clothing): </label><span>{{code.descriptionClothing}}</span></div>
+  <div><label>Last Seen: </label><span>{{code.lastSeen}}</span></div>
+  <div *ngIf="true"><label>DEBUG: </label><span>{{code.timestampLogged}}</span></div>
   <div *ngIf="code.resolved; else missing">
     <label class="{{styleCode(code)}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{codeTimeMissing(code)}}</label>
   </div>

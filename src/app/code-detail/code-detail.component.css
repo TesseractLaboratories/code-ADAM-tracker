@@ -19,3 +19,6 @@ button.close {
     color: #888;
     margin-bottom: 12px;
 }
+label {
+    font-weight: bold;
+}

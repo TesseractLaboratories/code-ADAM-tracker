@@ -1,4 +1,13 @@
-  <h2>New Report: {{code.name | uppercase}}</h2>
+<div *ngIf="passphrase == access; else prompt">
+  <select [(ngModel)]="code">
+    <option [ngValue]="newReport">
+      New Report
+    </option>
+    <option [ngValue]="code" *ngFor="let code of codes">
+      {{code.id}}: {{code.name}}
+    </option>
+  </select>
+  <h2>{{code.id ? "Edit" : "New"}} Report: {{code.name | uppercase}}</h2>
   <div><label>Name: </label><input [(ngModel)]="code.name" placeholder="Unknown"></div>
   <div><label>Age: </label><input [(ngModel)]="code.age" placeholder="Unknown"></div>
   <div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder="Unknown"></div>
@@ -10,5 +19,7 @@
   <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="code.timestampLogged" placeholder=""></div>
   <div><img class="button" alt="upload" (click)="upload()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Raise_wage_rise_upraise_upgrade_up_take.png">
     <br>
-    Submit Report
+    {{code.id ? "Update" : "Submit"}} Report
   </div>
+</div>
+<ng-template #prompt><label>Access: </label><input [(ngModel)]="passphrase"></ng-template>

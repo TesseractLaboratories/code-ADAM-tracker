@@ -12,7 +12,21 @@ import {Location} from '@angular/common';
 })
 export class SubmitReportComponent implements OnInit {
   code: Code;
+  newReport: Code;
+  codes: Code[];
+  id: number;
   private location: Location;
+  access = 'Kumoricon2018';
+  passphrase: '';
+
+  getCodes(): void {
+      this.codeService.getCodes()
+          .subscribe(retrievedCodes => this.codes = retrievedCodes);
+  }
+
+  newCode(): Code {
+    return Code.emptyCode();
+  }
 
   upload(): void {
     // TODO:: need a new method?
@@ -28,7 +42,9 @@ export class SubmitReportComponent implements OnInit {
   constructor(private codeService: CodeService) { }
 
   ngOnInit() {
-    this.code = Code.emptyCode();
+    this.newReport = this.newCode();
+    this.code = this.newReport;
+    this.getCodes();
   }
 
 }
