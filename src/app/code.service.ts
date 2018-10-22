@@ -5,7 +5,7 @@ import {Observable, of} from 'rxjs';
 import { MessageService } from './message.service';
 // import { catchError, map, tap } from 'rxjs/operators';
 import { Client } from 'elasticsearch-browser';
-import {SearchParams, SearchResponse} from 'elasticsearch';
+import {IndexDocumentParams, SearchParams, SearchResponse} from 'elasticsearch';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -32,6 +32,7 @@ export class CodeService {
   private search_endpoint = '/_search';
   private filter_path = ['hits.hits._source', 'hits.hits._id'];
   private codesIndex = 'adam-sandbox';
+  private docType = 'code';
 
     static processResponse(response: SearchResponse<Code>) {
         return response.hits.hits.map(hit => {
@@ -91,12 +92,15 @@ export class CodeService {
     // );
   }
 
-  updateCode(code: Code): Observable<any> {
-        return null;
-    // return this.http.put(this.codesUrl, code,  httpOptions).pipe(
-    //   tap(_ => this.log(`updated code id=${code.id}`)),
-    //   catchError(this.handleError<any>('updateCode'))
-    // );
+  updateCode(code: Code): Promise<any> {
+        const codeID = code.id;
+        return this.esClient.index({
+            index: this.codesIndex,
+            type: this.docType,
+            id: codeID,
+            body: code,
+            refresh: 'wait_for'
+        });
   }
 
   /**

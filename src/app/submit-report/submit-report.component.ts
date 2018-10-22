@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Code } from '../code';
 import {CodeService} from '../code.service';
 import {Location} from '@angular/common';
+import {getOrCreateChangeDetectorRef} from '@angular/core/src/render3/di';
 
 
 
@@ -20,8 +21,14 @@ export class SubmitReportComponent implements OnInit {
   passphrase: '';
 
   getCodes(): void {
-      this.codeService.getCodes();
-          //.subscribe(retrievedCodes => this.codes = retrievedCodes);
+      this.codeService.getCodes().then(response => {
+        this.codes = CodeService.processResponse(response);
+        this.newReport = this.newCode();
+        if (!this.code) {
+          this.code = this.newReport;
+        }
+        this.changeDetectorRef.detectChanges();
+      });
   }
 
   newCode(): Code {
@@ -30,8 +37,17 @@ export class SubmitReportComponent implements OnInit {
 
   upload(): void {
     // TODO:: need a new method?
+      if (!this.code.id) {
+          // New code with highest+1 ID value
+          // TODO:: This is a hacky assumption and can be improved with better database handling
+          this.code.id = this.codes.length ? this.codes.reduce((prev, current) => (prev.id > current.id) ? prev : current).id + 1 : 1;
+      }
     this.codeService.updateCode(this.code)
-        .subscribe(() => this.goBack());
+         .then(() => {
+           this.getCodes();
+           // this.newReport = this.newCode();
+           // location.reload();
+         });
   }
 
   goBack(): void {
@@ -39,11 +55,9 @@ export class SubmitReportComponent implements OnInit {
   }
 
 
-  constructor(private codeService: CodeService) { }
+  constructor(private codeService: CodeService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.newReport = this.newCode();
-    this.code = this.newReport;
     this.getCodes();
   }
 
