@@ -33,14 +33,7 @@ export class CodeDetailComponent implements OnInit {
   }
 
   refresh(): void {
-    this.codeService.getCode(this.code.id).subscribe(newCode => this.code = newCode); // {
-    //       if (newCode === this.code) {
-    //         this.codeService.updateCode(this.code);
-    //       } else {
-    //         // TODO:: sanitize for async editing
-    //       }
-    //     }
-    // );
+    this.codeService.getCode(this.code.id).then(newCode => this.code = newCode);
   }
 
   constructor(private codeService: CodeService) { }

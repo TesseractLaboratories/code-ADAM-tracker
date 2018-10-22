@@ -5,7 +5,7 @@ import {Observable, of} from 'rxjs';
 import { MessageService } from './message.service';
 // import { catchError, map, tap } from 'rxjs/operators';
 import { Client } from 'elasticsearch-browser';
-import {IndexDocumentParams, SearchParams, SearchResponse} from 'elasticsearch';
+import {GetSourceParams, IndexDocumentParams, SearchParams, SearchResponse} from 'elasticsearch';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -37,7 +37,7 @@ export class CodeService {
     static processResponse(response: SearchResponse<Code>) {
         return response.hits.hits.map(hit => {
             const code = hit._source;
-            code.id = +hit._id;
+            // code.id = +hit._id;
             return code;
         }).sort((c1, c2) => (+c1.resolved - +c2.resolved) || c2.id - c1.id);
         // Sort first by coercing Booleans to sortable numbers, bubble resolved cases to the bottom,
@@ -83,13 +83,14 @@ export class CodeService {
 
   }
 
-  getCode(id: number): Observable<Code> {
-    const url = `${this.codesUrl}/${id}`;
-    return null;
-    // return this.http.get<Code>(url).pipe(
-    //     tap(_ => this.log(`fetched code id=${id}`),
-    //     catchError(this.handleError<Code>(`getCode id=${id}`)))
-    // );
+  getCode(id: number): Promise<Code> {
+    return this.esClient.getSource({
+          index: this.codesIndex,
+          type: this.docType,
+          id: id,
+          filterPath: this.filter_path
+        }
+    );
   }
 
   updateCode(code: Code): Promise<any> {
