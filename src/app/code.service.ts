@@ -28,10 +28,8 @@ export class CodeService {
   // TODO:: config this based on env
   private esBase = 'https://search-tesseract-nebula-qr6ds2kuloefbk63ne3miucjo4.us-west-2.es.amazonaws.com';
   // 'https://search-tesseract-nebula-qr6ds2kuloefbk63ne3miucjo4.us-west-2.es.amazonaws.com';
-  private codesUrl = this.esBase + '/adam-sandbox/code';
-  private search_endpoint = '/_search';
   private filter_path = ['hits.hits._source', 'hits.hits._id'];
-  private codesIndex = 'adam-sandbox';
+  private codesIndex = 'code-adam';
   private docType = 'code';
 
     static processResponse(response: SearchResponse<Code>) {
