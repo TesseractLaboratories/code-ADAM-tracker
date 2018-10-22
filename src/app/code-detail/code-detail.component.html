@@ -14,14 +14,13 @@
   <div><label>Description (physical): </label><span>{{code.descriptionPhysical}}</span></div>
   <div><label>Description (clothing): </label><span>{{code.descriptionClothing}}</span></div>
   <div><label>Last Seen: </label><span>{{code.lastSeen}}</span></div>
-  <div *ngIf="true"><label>DEBUG: </label><span>{{code.timestampLogged}}</span></div>
+  <div *ngIf="false"><label>DEBUG: </label><span>{{code.timestampLogged}}</span></div>
   <div *ngIf="code.resolved; else missing">
     <label class="{{styleCode(code)}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{codeTimeMissing(code)}}</label>
   </div>
   <ng-template #missing>
     <label class="{{styleCode(code)}}">Missing For {{codeTimeMissing(code)}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
   </ng-template>
-  <div>Update status to <button (click)="updateFound(code)">{{code.resolved ? "STILL MISSING" : "FOUND"}}</button></div>
 </div>
 <ng-template #image>
   <img width="300" alt="Kumoricon Logo" src="https://www.kumoricon.org/files/images/logo-2018-rasterized.png">

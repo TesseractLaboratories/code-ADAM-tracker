@@ -1,4 +1,4 @@
-<div *ngIf="passphrase == access; else prompt">
+<div *ngIf="auth; else prompt">
   <select [(ngModel)]="code">
     <option [ngValue]="newReport">
       New Report
@@ -16,10 +16,19 @@
   <div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder="Unknown"></div>
   <div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder="Unknown"></div>
   <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder="Unknown"></div>
-  <div *ngIf="true"><label>DEBUG: </label><input [(ngModel)]="code.timestampLogged" placeholder=""></div>
+  <div *ngIf="code.resolved; else missing">
+    <label class="{{styleCode(code)}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{codeTimeMissing(code)}}</label>
+  </div>
+  <ng-template #missing>
+    <label class="{{styleCode(code)}}">Missing For {{codeTimeMissing(code)}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
+  </ng-template>
+  <div>Update status to <button (click)="updateFound(code)">{{code.resolved ? "STILL MISSING" : "FOUND"}}</button></div>
   <div><img class="button" alt="upload" (click)="upload()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Raise_wage_rise_upraise_upgrade_up_take.png">
     <br>
     {{code.id ? "Update" : "Submit"}} Report
   </div>
 </div>
-<ng-template #prompt><label>Access: </label><input [(ngModel)]="passphrase"></ng-template>
+<ng-template #prompt>
+    <label>Access: </label><input type="text" [(ngModel)]="passphrase" (keyup.enter)="submit()">
+    <input type="submit" value="submit" (click)="submit()" />
+</ng-template>

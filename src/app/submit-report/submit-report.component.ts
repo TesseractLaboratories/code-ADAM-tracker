@@ -2,8 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Code } from '../code';
 import {CodeService} from '../code.service';
 import {Location} from '@angular/common';
-import {getOrCreateChangeDetectorRef} from '@angular/core/src/render3/di';
-
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -17,8 +16,16 @@ export class SubmitReportComponent implements OnInit {
   codes: Code[];
   id: number;
   private location: Location;
-  access = 'Kumoricon2018';
+  access = 'DispatchDave';
   passphrase: '';
+  auth = false;
+
+  submit() {
+    if (this.passphrase === this.access) {
+      this.auth = true;
+      this.cookieService.set('kumoDispatch', 'true');
+    }
+  }
 
   getCodes(): void {
       this.codeService.getCodes().then(response => {
@@ -45,8 +52,6 @@ export class SubmitReportComponent implements OnInit {
     this.codeService.updateCode(this.code)
          .then(() => {
            this.getCodes();
-           // this.newReport = this.newCode();
-           // location.reload();
          });
   }
 
@@ -55,10 +60,30 @@ export class SubmitReportComponent implements OnInit {
   }
 
 
-  constructor(private codeService: CodeService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private codeService: CodeService, private changeDetectorRef: ChangeDetectorRef, private cookieService: CookieService) { }
 
   ngOnInit() {
     this.getCodes();
+    this.auth = this.cookieService.check('kumoDispatch');
+
+    // Any time we're building a new report, keep the Time Reported current
+    setInterval(() => {
+      if (!this.code.id) {
+        this.code.timestampLogged = (new Date).getTime();
+      }
+    }, 1000);
   }
 
+// ***Transplanted from Code Detail
+    styleCode(code: Code): string {
+        return Code.getTimeMissingCss(code,  false);
+    }
+
+    codeTimeMissing(code: Code): string {
+        return Code.getTimeMissing(code);
+    }
+
+    updateFound(code: Code): void {
+        Code.toggleFound(code);
+    }
 }
