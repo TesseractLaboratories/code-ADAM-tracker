@@ -15,8 +15,8 @@ export class CodesComponent implements OnInit {
   selectedCode: Code;
 
   getCodes(): void {
-    this.codeService.getCodes()
-        .subscribe(retrievedCodes => this.codes = retrievedCodes);
+    this.codeService.getCodes().then(response => this.codes = CodeService.processResponse(response));
+        // .subscribe(retrievedCodes => this.codes = retrievedCodes);
   }
 
   onSelect(code: Code): void {

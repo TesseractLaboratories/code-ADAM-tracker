@@ -20,8 +20,8 @@ export class SubmitReportComponent implements OnInit {
   passphrase: '';
 
   getCodes(): void {
-      this.codeService.getCodes()
-          .subscribe(retrievedCodes => this.codes = retrievedCodes);
+      this.codeService.getCodes();
+          //.subscribe(retrievedCodes => this.codes = retrievedCodes);
   }
 
   newCode(): Code {

@@ -16,8 +16,7 @@ export class DashboardComponent implements OnInit {
 
     getActiveCodes(): void {
       // Display only unresolved codes in the dashboard
-        this.codeService.getUnresolvedCodes()
-            .subscribe(retrievedCodes => this.codes = retrievedCodes);
+        this.codeService.getUnresolvedCodes().then(response => this.codes = CodeService.processResponse(response));
     }
 
     onSelect(code: Code): void {

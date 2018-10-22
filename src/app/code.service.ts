@@ -3,59 +3,100 @@ import { Injectable } from '@angular/core';
 import { Code } from './code';
 import {Observable, of} from 'rxjs';
 import { MessageService } from './message.service';
-import { catchError, map, tap } from 'rxjs/operators';
+// import { catchError, map, tap } from 'rxjs/operators';
+import { Client } from 'elasticsearch-browser';
+import {SearchParams, SearchResponse} from 'elasticsearch';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodeService {
 
+  constructor(private http: HttpClient,
+              private messageService: MessageService) {
+      if (!this.esClient) {
+          this.connect();
+      }
+  }
+    private esClient: Client;
+
   // TODO:: config this based on env
-  private codesUrl = 'api/codes';
+  private esBase = 'https://search-tesseract-nebula-qr6ds2kuloefbk63ne3miucjo4.us-west-2.es.amazonaws.com';
+  // 'https://search-tesseract-nebula-qr6ds2kuloefbk63ne3miucjo4.us-west-2.es.amazonaws.com';
+  private codesUrl = this.esBase + '/adam-sandbox/code';
+  private search_endpoint = '/_search';
+  private filter_path = ['hits.hits._source', 'hits.hits._id'];
+  private codesIndex = 'adam-sandbox';
+
+    static processResponse(response: SearchResponse<Code>) {
+        return response.hits.hits.map(hit => {
+            const code = hit._source;
+            code.id = +hit._id;
+            return code;
+        }).sort((c1, c2) => (+c1.resolved - +c2.resolved) || c2.id - c1.id);
+        // Sort first by coercing Booleans to sortable numbers, bubble resolved cases to the bottom,
+        // then reverse order by ID
+    }
 
 
+    private connect() {
+        this.esClient = new Client({
+            host: this.esBase,
+            log: 'trace'
+        });
+    }
 
-  getCodes(): Observable<Code[]> {
+    private params(onlyUnresolved: boolean): SearchParams {
+        // TODO:: clean up control structure
+        if (onlyUnresolved) {
+            return {
+                index: this.codesIndex,
+                filterPath: this.filter_path,
+                body: {
+                    'query': {
+                        'term': {'resolved': false}
+                    }
+                }
+            };
+        } else {
+            return {
+                index: this.codesIndex,
+                filterPath: this.filter_path
+            };
+        }
+    }
+
+  getCodes(): Promise<SearchResponse<Code>> {
       this.log('Requesting codes...');
-      // TODO:: sort return by timestamp
-    return this.http.get<Code[]>(this.codesUrl)
-        .pipe(
-            tap(codes => this.log('Fetched codes')),
-            catchError(this.handleError('getCodes', []))
-        );
+      return this.esClient.search(this.params(false));
   }
 
-  getUnresolvedCodes(): Observable<Code[]> {
+  getUnresolvedCodes(): Promise<SearchResponse<Code>> {
     this.log('Requesting unresolved codes...');
-      return this.http.get<Code[]>(this.codesUrl)
-          .pipe(
-              // Return only unresolved codes
-              // TODO:: replace with ES query
-              map(codes => codes.filter(code => !code.resolved))
-          )
-          .pipe(
-              tap(codes => this.log('Fetched codes')),
-              catchError(this.handleError('getUnresolvedCodes', []))
-          );
+      return this.esClient.search(this.params(true));
+
   }
 
   getCode(id: number): Observable<Code> {
     const url = `${this.codesUrl}/${id}`;
-    return this.http.get<Code>(url).pipe(
-        tap(_ => this.log(`fetched code id=${id}`),
-        catchError(this.handleError<Code>(`getCode id=${id}`)))
-    );
+    return null;
+    // return this.http.get<Code>(url).pipe(
+    //     tap(_ => this.log(`fetched code id=${id}`),
+    //     catchError(this.handleError<Code>(`getCode id=${id}`)))
+    // );
   }
 
   updateCode(code: Code): Observable<any> {
-    return this.http.put(this.codesUrl, code,  httpOptions).pipe(
-      tap(_ => this.log(`updated code id=${code.id}`)),
-      catchError(this.handleError<any>('updateCode'))
-    );
+        return null;
+    // return this.http.put(this.codesUrl, code,  httpOptions).pipe(
+    //   tap(_ => this.log(`updated code id=${code.id}`)),
+    //   catchError(this.handleError<any>('updateCode'))
+    // );
   }
 
   /**
@@ -81,9 +122,6 @@ export class CodeService {
   private log(message: string) {
     this.messageService.add(`CodeService: ${message}`);
   }
-
-  constructor(private http: HttpClient,
-              private messageService: MessageService) { }
 
 
 }
