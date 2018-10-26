@@ -3,6 +3,7 @@ environment_variables:
     plaintext:
         S3_BUCKET: "code-adam-tracker"
         BUILD_ENV: "prod"
+        DISTRIBUTION_ID: "E36PLPV7SFW43T"
 phases:
     install:
         commands:
@@ -16,6 +17,7 @@ phases:
     post_build:
          commands:
             - aws s3 cp dist/* s3://${S3_BUCKET} --recursive
+            - aws cloudfront create-invalidation --distribution-id "${DISTRIBUTION_ID}" --paths /index.html /*
             - echo Build completed on `date`
 artifacts:
     files:

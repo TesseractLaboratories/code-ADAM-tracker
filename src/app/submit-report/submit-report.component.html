@@ -23,7 +23,7 @@
     <label class="{{styleCode(code)}}">Missing For {{codeTimeMissing(code)}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
   </ng-template>
   <div>Update status to <button (click)="updateFound(code)">{{code.resolved ? "STILL MISSING" : "FOUND"}}</button></div>
-  <div><img class="button" alt="upload" (click)="upload()" src="https://cdn3.iconfinder.com/data/icons/perfect-flat-icons-2/512/Raise_wage_rise_upraise_upgrade_up_take.png">
+  <div><img class="button" alt="upload" (click)="upload()" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBvbHlnb24gcG9pbnRzPSI0NTMuOTU5LDM4NS4yNDUgNDUzLjk1OSw0NDMuMjc0IDU4LjA0Miw0NDMuMjc0IDU4LjA0MiwzODUuMjQ1IDAuMDEzLDM4NS4yNDUgMC4wMTMsNTAxLjMwNCA1MTEuOTg3LDUwMS4zMDQgICAgNTExLjk4NywzODUuMjQ1ICAiPjwvcG9seWdvbj48cG9seWdvbiBwb2ludHM9IjE4Ny42NTksMzg1LjI0NSAzMjQuMzQxLDM4NS4yNDUgMzI0LjM0MSwyMDYuOTM5IDQzMi42MTYsMjA2LjkzOSAyNTYuMDAxLDEwLjY5NiA3OS4zNTMsMjA2LjkzOSAxODcuNjU5LDIwNi45MzkgICAgICI+PC9wb2x5Z29uPjwvZz48L3N2Zz4=">
     <br>
     {{code.id ? "Update" : "Submit"}} Report
   </div>
