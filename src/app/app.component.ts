@@ -12,7 +12,7 @@ export class AppComponent {
 
   // ****** Temporary implementation of simple password barrier for the 2018 proof-of-concept
     constructor(private cookieService: CookieService) { }
-    access = 'Kumoricon2018';
+    access = 'Kumoricon2019';
     dispatch = 'DispatchDave';
     passphrase: '';
     auth = false;
@@ -27,7 +27,9 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        this.auth = this.cookieService.check('kumOps') || this.cookieService.check('kumoDispatch');
+        this.auth = this.cookieService.check('kumoricon_staff_session_id')
+            || this.cookieService.check('kumOps')
+            || this.cookieService.check('kumoDispatch');
     }
     // **************************
 }
