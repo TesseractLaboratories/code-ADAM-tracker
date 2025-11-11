@@ -1,0 +1,10 @@
+<button class="clear" *ngIf="!showLog" (click)="toggleLog()">Show Log</button>
+<div *ngIf="showLog">
+  <button class='clear' (click)="toggleLog()">Hide Log</button>
+  <button class='clear' (click)="messageService.clear()">clear</button>
+
+  <div *ngIf="messageService.messages.length">
+    <hr>
+    <div class="message" *ngFor='let message of messageService.messages'>{{message}}</div>
+  </div>
+</div>

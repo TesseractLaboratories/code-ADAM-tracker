@@ -1,0 +1,14 @@
+<button *ngIf="selectedCode" (click)="close()">Close selected</button>
+<app-code-detail [code]="selectedCode"></app-code-detail>
+<h2>All Reports
+    <img class="click-icon" alt="Refresh" (click)="refresh()" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTUwOC43MDgsMjE1LjM2aC03OS45NjVjMy4xMjUsMTMuMjk2LDQuNzUsMjYuOTgzLDQuNzUsNDAuOTJjMCwyMy45NjgtNC42ODgsNDcuMTg3LTEzLjkzNyw2OC45NjYgIGMtOC45MzgsMjEuMTI1LTIxLjc0OSw0MC4wOTItMzguMDYzLDU2LjQwNGMtMTYuMzQzLDE2LjI3OS0zNS4zMTIsMjkuMDk0LTU2LjQzNSwzOC4wMjdjLTIxLjg0NCw5LjIyMS00NS4wNjMsMTMuODc1LTY5LjA2MiwxMy44NzUgIHMtNDcuMjQ3LTQuNjU0LTY5LjA1OS0xMy44NzVjLTIxLjEyNC04LjkzNi00MC4xMjMtMjEuNzQ4LTU2LjQ2Ni0zOC4wMjdjLTE2LjMxMy0xNi4zMTQtMjkuMTI0LTM1LjI3OS0zOC4wNjItNTYuNDA0ICBjLTkuMjE4LTIxLjc3OS0xMy45MDQtNDQuOTk4LTEzLjkwNC02OC45NjZjMC0yMy45ODMsNC42ODctNDcuMTg3LDEzLjkwNC02OC45OThjOC45MzgtMjEuMTA4LDIxLjc0OS00MC4wNzYsMzguMDYyLTU2LjM3MyAgYzE2LjM0My0xNi4zMTMsMzUuMzQyLTI5LjEyNCw1Ni40NjYtMzguMDQ1YzIxLjgxMy05LjIxOSw0NS4wNi0xMy44OTEsNjkuMDU5LTEzLjg5MXM0Ny4yMTgsNC42NzIsNjkuMDYyLDEzLjg5MSAgYzkuMjc4LDMuOTIxLDE4LjEyNCw4LjYwOSwyNi41NjEsMTMuOTgybC01MC4wOTEsNTAuMDE0aDE1Ny4wMjJWMC4wMDlMNDA3Ljk5LDUwLjUwOEMzNjUuNDk1LDE5LjEwMywzMTIuOTAzLDAuNTQxLDI1NiwwLjU0MSAgQzExNC42MDEsMC41NDEsMC4wMTMsMTE1LjAzNywwLjAxMywyNTYuMjgxQzAuMDEzLDM5Ny40OTYsMTE0LjYwMSw1MTEuOTksMjU2LDUxMS45OWMxNDEuMzY4LDAsMjU1Ljk4Ny0xMTQuNDk0LDI1NS45ODctMjU1LjcwOCAgQzUxMS45ODksMjQyLjM0NCw1MTAuODY0LDIyOC42ODgsNTA4LjcwOCwyMTUuMzZ6Ij48L3BhdGg+PC9zdmc+">
+</h2>
+<!--TODO:: Sort by resolved AND timestamp-->
+<ul class="codes">
+    <li *ngFor="let code of codes"
+        (click)="onSelect(code)"
+        class="{{styleListEntry(code)}}"
+        [class.selected]="code === selectedCode">
+        <span class="badge">{{code.id}}</span> {{code.name}}
+    </li>
+</ul>

@@ -1,0 +1,34 @@
+<div *ngIf="auth; else prompt">
+  <select [(ngModel)]="code">
+    <option [ngValue]="newReport">
+      New Report
+    </option>
+    <option [ngValue]="code" *ngFor="let code of codes">
+      {{code.id}}: {{code.name}}
+    </option>
+  </select>
+  <h2>{{code.id ? "Edit" : "New"}} Report: {{code.name | uppercase}}</h2>
+  <div><label>Name: </label><input [(ngModel)]="code.name" placeholder="Unknown"></div>
+  <div><label>Age: </label><input [(ngModel)]="code.age" placeholder="Unknown"></div>
+  <div><label>Gender: </label><input [(ngModel)]="code.gender" placeholder="Unknown"></div>
+  <div><label>Cosplay: </label><input [(ngModel)]="code.cosplay" placeholder="Unknown"></div>
+  <div><label>Cosplay Image Link </label><input [(ngModel)]="code.cosplayImg" placeholder=""></div>
+  <div><label>Description (physical): </label><input [(ngModel)]="code.descriptionPhysical" placeholder="Unknown"></div>
+  <div><label>Description (clothing): </label><input [(ngModel)]="code.descriptionClothing" placeholder="Unknown"></div>
+  <div><label>Last Seen: </label><input [(ngModel)]="code.lastSeen" placeholder="Unknown"></div>
+  <div *ngIf="code.resolved; else missing">
+    <label class="{{styleCode(code)}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{codeTimeMissing(code)}}</label>
+  </div>
+  <ng-template #missing>
+    <label class="{{styleCode(code)}}">Missing For {{codeTimeMissing(code)}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
+  </ng-template>
+  <div>Update status to <button (click)="updateFound(code)">{{code.resolved ? "STILL MISSING" : "FOUND"}}</button></div>
+  <div><img class="button" alt="upload" (click)="upload()" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBvbHlnb24gcG9pbnRzPSI0NTMuOTU5LDM4NS4yNDUgNDUzLjk1OSw0NDMuMjc0IDU4LjA0Miw0NDMuMjc0IDU4LjA0MiwzODUuMjQ1IDAuMDEzLDM4NS4yNDUgMC4wMTMsNTAxLjMwNCA1MTEuOTg3LDUwMS4zMDQgICAgNTExLjk4NywzODUuMjQ1ICAiPjwvcG9seWdvbj48cG9seWdvbiBwb2ludHM9IjE4Ny42NTksMzg1LjI0NSAzMjQuMzQxLDM4NS4yNDUgMzI0LjM0MSwyMDYuOTM5IDQzMi42MTYsMjA2LjkzOSAyNTYuMDAxLDEwLjY5NiA3OS4zNTMsMjA2LjkzOSAxODcuNjU5LDIwNi45MzkgICAgICI+PC9wb2x5Z29uPjwvZz48L3N2Zz4=">
+    <br>
+    {{code.id ? "Update" : "Submit"}} Report
+  </div>
+</div>
+<ng-template #prompt>
+    <label>Access: </label><input type="text" [(ngModel)]="passphrase" (keyup.enter)="submit()">
+    <input type="submit" value="submit" (click)="submit()" />
+</ng-template>

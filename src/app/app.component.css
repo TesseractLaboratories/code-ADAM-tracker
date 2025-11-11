@@ -1,0 +1,72 @@
+/* Application-wide Styles */
+/*TODO:: style */
+.found {
+    background-color: #80dc90;
+}
+
+.ok {
+    background-color: #60d9dc;
+}
+
+.alert {
+    background-color: #d9dc5e;
+}
+
+.warn {
+    background-color: #dc823b;
+}
+
+.severe {
+    background-color: #ee7679;
+}
+.click-icon {
+    height: 0.8em;
+    cursor: pointer;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #cde4ff;
+}
+h1 {
+    color: #992d00;
+    font-family: Times New Roman, Georgia, serif;
+    font-size: 250%;
+}
+h2, h3 {
+    color: #444;
+    font-family: Times New Roman, Georgia, serif;
+    font-weight: lighter;
+}
+
+nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 4px;
+}
+nav a:visited, a:link {
+    color: #607d8b;
+}
+nav a:hover {
+    color: #039be5;
+    background-color: #cfd8dc;
+}
+nav a.active {
+    color: #039be5;
+}
+body {
+    margin: 2em;
+}
+body, input[text], button {
+    color: #004288;
+    font-family: Cambria, Georgia;
+}
+/* everywhere else */
+* {
+    font-family: Times New Roman, Georgia, serif;
+}

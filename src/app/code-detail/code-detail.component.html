@@ -1,0 +1,27 @@
+<div *ngIf="code; else image">
+  <h2>Code [{{code.id}}] Details: {{code.name | uppercase}}</h2>
+  <div><img class="click-icon" alt="download" (click)="refresh()" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBvbHlnb24gcG9pbnRzPSI0NTMuOTU5LDM4NS4yNDUgNDUzLjk1OSw0NDMuMjc0IDU4LjA0Miw0NDMuMjc0IDU4LjA0MiwzODUuMjQ1IDAuMDEzLDM4NS4yNDUgMC4wMTMsNTAxLjMwNCA1MTEuOTg3LDUwMS4zMDQgICAgNTExLjk4NywzODUuMjQ1ICAiPjwvcG9seWdvbj48cG9seWdvbiBwb2ludHM9IjQzMi42MTYsMTg5LjAzMyAzMjQuMzQxLDE4OS4wMzMgMzI0LjM0MSwxMC42OTYgMTg3LjYyOSwxMC42OTYgMTg3LjYyOSwxODkuMDMzIDc5LjM4NCwxODkuMDMzIDI1Ni4wMDEsMzg1LjI0NSAgICAgIj48L3BvbHlnb24+PC9nPjwvc3ZnPg=="> Download latest</div>
+  <div><label>Name: </label><span>{{code.name}}</span></div>
+  <div><label>Age: </label><span>{{code.age}}</span></div>
+  <div><label>Gender: </label><span>{{code.gender}}</span></div>
+  <div>
+    <label>Cosplay: </label>
+    <span>{{code.cosplay}}</span>
+    <button *ngIf="code.cosplayImg" (click)="showImage()">{{imageDisplay ? "Hide image" : "Show Image"}}</button>
+  </div>
+  <!--TODO:: add image-->
+  <div *ngIf="imageDisplay"><img height="300" alt="Cosplay Reference" src="{{code.cosplayImg}}"></div>
+  <div><label>Description (physical): </label><span>{{code.descriptionPhysical}}</span></div>
+  <div><label>Description (clothing): </label><span>{{code.descriptionClothing}}</span></div>
+  <div><label>Last Seen: </label><span>{{code.lastSeen}}</span></div>
+  <div *ngIf="false"><label>DEBUG: </label><span>{{code.timestampLogged}}</span></div>
+  <div *ngIf="code.resolved; else missing">
+    <label class="{{styleCode(code)}}">Found at {{code.timestampResolved | date : 'H:mm, MMM d'}} after {{codeTimeMissing(code)}}</label>
+  </div>
+  <ng-template #missing>
+    <label class="{{styleCode(code)}}">Missing For {{codeTimeMissing(code)}}, since {{code.timestampLogged | date : 'H:mm, MMM d'}}</label>
+  </ng-template>
+</div>
+<ng-template #image>
+  <img width="300" alt="Kumoricon Logo" src="https://www.kumoricon.org/files/images/logo-2018-rasterized.png">
+</ng-template>
